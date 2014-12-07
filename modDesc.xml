@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<modDesc descVersion="20">
+    <author>Lütti</author>    
+	<title>
+        <de>Abschleppkosten</de>
+        <en>Abschleppkosten</en>    
+	</title>
+    <description>
+        <de>
+<![CDATA[Dieser Mod fügt beim zurücksetzen Abschleppkosten hinzu, welche von dem Wert der Maschine abhängig sind.]]>
+	</de>
+    <en>
+<![CDATA[Dieser Mod fügt beim zurücksetzen Abschleppkosten hinzu, welche von dem Wert der Maschine abhängig sind.]]>
+	</en>    
+	</description>
+    <multiplayer supported="true"/>
+    <iconFilename>store_Abschleppkosten.dds</iconFilename>    
+	<version>1.0</version>   
+	<extraSourceFiles>
+        <sourceFile filename="Abschleppkosten.lua" />
+    </extraSourceFiles>
+</modDesc>
