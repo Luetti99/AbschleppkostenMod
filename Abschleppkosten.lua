@@ -1,6 +1,10 @@
+--
 -- Abschleppkosten
+--
 -- Author: Lütti
+-- 
 -- fügt Abschleppkosten hinzu
+--
 
 Abschleppkosten = {};
 
@@ -11,6 +15,13 @@ function Abschleppkosten:deleteMap()
 end;
 
 function Abschleppkosten:mouseEvent(posX, posY, isDown, isUp, button)
+	if ... = true then 								-- Zurücksetz Event
+											-- evtl. ModDesc Pfad abfragen
+		Wert = getXMLInt(...modDesc(modDesc.storeItems.storeItem.price)) 	-- ... = Pfad zur ModDesc des zuletzt zurückgesetztem Objekts
+		AbKosten = Wert*0,02
+		g_currentMission.missionStats.money = g_currentMission.missionStats.money - AbKosten
+		print("Es wurden Abschleppkosten in Höhe von "..AbKosten.."€ abgezogen.")
+	end;
 end;
 
 function Abschleppkosten:keyEvent(unicode, sym, modifier, isDown)
@@ -24,7 +35,7 @@ function Abschleppkosten:keyEvent(unicode, sym, modifier, isDown)
     end;
 end;
 
-function Abschleppkosten: 	-- zurücksetz Event
+--[[function Abschleppkosten: 	-- zurücksetz Event
 	if ... then
 		-- moddesc path von zurückgesetztem Objekt abfragen
 		Wert = getXMLInt(modDesc(modDesc.storeItems.storeItem.price))
@@ -32,7 +43,7 @@ function Abschleppkosten: 	-- zurücksetz Event
 		g_currentMission.missionStats.money = g_currentMission.missionStats.money - AbKosten
 		print("Es wurden Abschleppkosten in Höhe von "..AbKosten.."€ abgezogen.")
 	end;	
-end;
+end;]]
 
 function Abschleppkosten:update(dt)
 end;
