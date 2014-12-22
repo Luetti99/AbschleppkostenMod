@@ -8,11 +8,11 @@ print ("extendedFinaceModel loaded");
 
 function Zusatzkosten:loadMap(name)
 	--print ("extendedFinaceModel loaded");
-	if g_currentMission.missionStats.difficulty = 1 then
+	if g_currentMission.missionStats.difficulty == 1 then
 		multiplikator = 0.2;
-	or g_currentMission.missionStats.difficulty = 2 then
+	or g_currentMission.missionStats.difficulty == 2 then
 		multiplikator = 0.12;
-	or g_currentMission.missionStats.difficulty = 3 then
+	or g_currentMission.missionStats.difficulty == 3 then
 		multiplikator = 0.08;
 	end;
 	print("multiplikator = "..multiplikator);
