@@ -8,6 +8,7 @@ local Freibetrag = 15000;
 function Zusatzkosten:loadMap(name)
 	g_currentMission.environment:addDayChangeListener(self); 
 	print ("extendedFinaceModel(by Luetti) loaded");
+		
 end;
 
 function Zusatzkosten:deleteMap()
@@ -18,7 +19,12 @@ function Zusatzkosten:mouseEvent(posX, posY, isDown, isUp, button)
 end;
 
 function Zusatzkosten:keyEvent(unicode, sym, modifier, isDown)
-end;
+	-- for _,v in pairs( g_currentMission.missionStats.financeStats) do
+		-- print (_);
+		-- print(v);
+		-- print ("---------");
+	-- end;
+-- end;
 
 function Zusatzkosten:update(dt)
 end;
@@ -34,25 +40,21 @@ function Zusatzkosten:dayChanged()
 		print("multiplikator: "..multiplikator);
 	
 	
-		local Kost1 = g_currentMission.economyManager.financeStatsHistory.newVehiclesCost;
+		local Kost1 = g_currentMission.missionStats.financeStats.newVehiclesCost;
 		print ("Kost1 ="..Kost1);
-		local Kost2 = g_currentMission.economyManager.financeStatsHistory.newAnimalsCost;
-		local Kost3 = g_currentMission.economyManager.financeStatsHistory.constructionCost;
-		local Kost4 = g_currentMission.economyManager.financeStatsHistory.vehicleRunningCost;
-		local Kost5 = g_currentMission.economyManager.financeStatsHistory.propertyMaintenance;
-		local Kost6 = g_currentMission.economyManager.financeStatsHistory.wagePayment;
+		local Kost2 = g_currentMission.missionStats.financeStats.newAnimalsCost;
+		local Kost3 = g_currentMission.missionStats.financeStats.constructionCost;
+		local Kost4 = g_currentMission.missionStats.financeStats.vehicleRunningCost;
+		local Kost5 = g_currentMission.missionStats.financeStats.propertyMaintenance;
+		local Kost6 = g_currentMission.missionStats.financeStats.wagePayment;
 		
-		local Gewinn1 = g_currentMission.economyManager.financeStatsHistory.harvestIncome;
-		local Gewinn2 = g_currentMission.economyManager.financeStatsHistory.missionIncome;
+		local Gewinn1 = g_currentMission.missionStats.financeStats.harvestIncome;
+		local Gewinn2 = g_currentMission.missionStats.financeStats.missionIncome;
 	
-		local Anderes1 = g_currentMission.economyManager.financeStatsHistory.loanInterest;
-		local Anderes2 = g_currentMission.economyManager.financeStatsHistory.other;
+		local Anderes1 = g_currentMission.missionStats.financeStats.loanInterest;
+		local Anderes2 = g_currentMission.missionStats.financeStats.other;
 	
 		local Gewinn = Kost1 + Kost2 + Kost3 + Kost4 + Kost5 + Kost6 + Gewinn1 + Gewinn2 + Anderes1 + Anderes2;
-		
-		-- local moneyold = g_currentMission:getpreviousDayMoney();
-		-- local money = g_currentMission:getMoney();
-		-- local Gewinn = money - moneyold
 	
 		print ("Gewinn ="..Gewinn);
 		if Gewinn >= Freibetrag then
