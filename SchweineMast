@@ -1,0 +1,58 @@
+function SchweineZucht:HookStatisticView()
+	local g = getfenv(0)
+	if not g.SchweineZuchtHook then
+		g.SchweineZuchtHook = {}
+		g.SchweineZuchtHook.StatisticViewDraw = StatisticView.draw
+		StatisticView.draw = function(...)
+			local r = {g.SchweineZuchtHook.StatisticViewDraw(...)}
+			local SV = select(1,...)
+			local page = SV:getCurrentPageId()
+			if SV.pages[page].element.SchweineZucht then
+				local Anlagen = SV.pages[page].element.elements;
+				for i = 1,table.getn(Anlagen) do
+					Anlagen[i].target:UpdatePigStatistik()
+					for j=1,table.getn(Anlagen[i].elements) do
+						DrawElements(Anlagen[i].elements[j])
+					end
+				end;
+				setTextAlignment(RenderText.ALIGN_LEFT);
+				setTextBold(false)
+				setTextColor(1,1,1,1);
+			end
+			return unpack(r)
+		end
+		g.SchweineZuchtHook.StatisticViewUpdatePriceTable = StatisticView.updatePriceTable
+		StatisticView.updatePriceTable = function(...)
+			local fixFillTypes = {}
+			for k,v in pairs (g_SchweineDaten) do
+				local desc = Fillable.fillTypeNameToDesc[k] 
+				if desc ~= nil then
+					fixFillTypes[desc.index] = true;
+				end
+			end
+			for k,v in pairs(g_currentMission.tipTriggers) do
+				if v.acceptedFillTypes then
+					for fillType in pairs (v.acceptedFillTypes) do
+						if fixFillTypes[fillType] then
+							if v.priceMultipliers and (v.SZ_pM == nil or v.SZ_pM[fillType] == nil) then
+								if v.SZ_pM == nil then v.SZ_pM ={} end
+								v.SZ_pM[fillType] = v.priceMultipliers[fillType]
+								v.priceMultipliers[fillType] = v.priceMultipliers[fillType] / 1000
+							end
+						end
+					end
+				end
+			end
+			local r = {g.SchweineZuchtHook.StatisticViewUpdatePriceTable(...)}
+			for k,v in pairs(g_currentMission.tipTriggers) do
+				if v.SZ_pM then
+					for fillType in pairs (v.SZ_pM) do
+						v.priceMultipliers[fillType] = v.SZ_pM[fillType]
+					end
+					v.SZ_pM = nil;
+				end
+			end
+			return unpack(r)
+		end
+	end;
+end
