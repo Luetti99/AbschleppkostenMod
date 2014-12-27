@@ -8,7 +8,7 @@ local Freibetrag = 15000;
 function Zusatzkosten:loadMap(name)
 	g_currentMission.environment:addDayChangeListener(self); 
 	print ("extendedFinaceModel(by Luetti) loaded");
-		
+
 end;
 
 function Zusatzkosten:deleteMap()
@@ -19,12 +19,8 @@ function Zusatzkosten:mouseEvent(posX, posY, isDown, isUp, button)
 end;
 
 function Zusatzkosten:keyEvent(unicode, sym, modifier, isDown)
-	-- for _,v in pairs( g_currentMission.missionStats.financeStats) do
-		-- print (_);
-		-- print(v);
-		-- print ("---------");
-	-- end;
--- end;
+
+end;
 
 function Zusatzkosten:update(dt)
 end;
@@ -35,13 +31,12 @@ end;
 function Zusatzkosten:dayChanged()
 	if g_currentMission:getIsServer() then
 		local difficulty = g_currentMission.missionStats.difficulty;
-		print ("Schwierigkeit: "..difficulty);	
+		--print ("Schwierigkeit: "..difficulty);	
 		local multiplikator = 0.2/difficulty;
-		print("multiplikator: "..multiplikator);
-	
+		--print("multiplikator: "..multiplikator);
 	
 		local Kost1 = g_currentMission.missionStats.financeStats.newVehiclesCost;
-		print ("Kost1 ="..Kost1);
+		--print ("Kost1 ="..Kost1);
 		local Kost2 = g_currentMission.missionStats.financeStats.newAnimalsCost;
 		local Kost3 = g_currentMission.missionStats.financeStats.constructionCost;
 		local Kost4 = g_currentMission.missionStats.financeStats.vehicleRunningCost;
@@ -56,7 +51,7 @@ function Zusatzkosten:dayChanged()
 	
 		local Gewinn = Kost1 + Kost2 + Kost3 + Kost4 + Kost5 + Kost6 + Gewinn1 + Gewinn2 + Anderes1 + Anderes2;
 	
-		print ("Gewinn ="..Gewinn);
+		--print ("Gewinn ="..Gewinn);
 		if Gewinn >= Freibetrag then
 			local Steuern = (Gewinn - Freibetrag) * multiplikator;
 			g_currentMission:addMoney(Steuern, "other")
